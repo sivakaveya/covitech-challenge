@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/4f9d14f6b3.js" crossorigin="anonymous"></script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <!-- <link rel="stylesheet" href="styling.css"> -->
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/styling.css') }}">
+    <title>QuickMeds</title>
+</head>
+
+<body>
+    <div id="home">
+        <div class="header">
+            <div class="time">
+                <i class="far fa-clock"></i> Mon-Fri 09:00-17:00 &nbsp
+                <i class="fas fa-phone-alt"> &nbsp 123-456-789 </i>
+            </div>
+            <div class="connect">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-linkedin-in"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+        </div>
+        <nav>
+            <div id="logo">
+                Quickmeds
+            </div>
+            <div id="navbar">
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About </a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="intro">
+            <h3 class="green">WE ARE READY TO HELP YOU</h3>
+            <h1>PHARMACY AT YOUR TIPS</h1>
+            <p>We are just one click away from providing our world class premium service and provide your requirements.</p>
+            <button> CONTACT US </button>
+        </div>
+        <div class="footer">
+            <form action="/" method="POST" enctype="multipart/form-data">
+                <label for="requ" style="margin-top: 30px;">Search your requirement:</label>
+                <input type="text" id="requirement" name="product">
+                <span><button type="submit">Search</button></span>
+            </form>
+        </div>
+    </div>
+    <div id="services">
+        <div id="serintro">
+            <h1 style="font-weight: bold;">QuickMeds <span>Services</span></h1>
+            <br>
+            <h1>Your requested orders.</h1>
+        </div>
+        <div id="grid">
+            {% for i in itemslist %}
+                <div class="box">
+                    {% if i['itemImage']=='default image' %}
+                        <img src='https://images.unsplash.com/photo-1603807008857-ad66b70431aa?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1953&q=80'>
+                    {% else %}
+                        <img src={{i['itemImage']}} >
+                    {% endif %}
+                    <h3>{{i['itemName']}}</h3>
+                    <p>Rs.{{i['itemRate']}}</p>
+                    <a href={{i['itemLink']}}><button>READ MORE</button></a>
+                </div>
+            {% endfor %}
+            <!-- <div class="box">
+                <img
+                    src="data:image/jpeg;base64,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">
+                <h3>Paracetamol</h3>
+                <p>Rs.500</p>
+                <button>READ MORE</button>
+            </div>
+            <div class="box">
+                <img
+                    src="https://ud-img-v2.azureedge.net/f_auto,q_auto:eco,w_800/u/products/48zegnc5gsmv41oi9u4f.908Z/DOLO-650-Tablet-15">
+                <h3>Dolo-650</h3>
+                <p>Rs.100</p>
+                <button>READ MORE</button>
+            </div>
+            <div class="box">
+                <img
+                    src="https://a-cf65ch.gskstatic.com/content/dam/cf-consumer-healthcare/panadol/en_in/adult/productshots/crocinadvance/455x455.jpg?auto=format">
+                <h3>Crocin</h3>
+                <p>Rs.200</p>
+                <button>READ MORE</button>
+            </div> -->
+        </div>
+    </div>
+    <div id="stats">
+        <div id="stats_intro">
+            <h5 style="margin-bottom: 10px;">WHY PAY MORE FOR A PRODUCT THAT'S AVAILABLE FOR MUCH CHEAPER?</h5>
+            <h1 style="line-height: normal; font-size: 45px;">COMPARE IT'S PRICE FROM VARIOUS WEBSITES IN JUST<span class="green"> ONE CLICK</span></h1>
+            <br>
+            <p style="font-size: 16px;">We help you to compare prices from various websites to give you the best,most expensive solution.</p>
+            <br>
+            <p style="font-size: 16px; margin-bottom: 15px;">Whether it's medicines or essential goods we display options that allow you to choose products ranging from cheapest to highest price from various websites</p>
+            <button> READ MORE </button>
+        </div>
+        <div id="stats_grid">
+            <div class="stats_item">
+                <h1>24/7</h1>
+                <h3>Availability</h3>
+            </div>
+            <div class="stats_item">
+                <h1>1280</h1>
+                <h3>Great Reviews</h3>
+            </div>
+            <div class="stats_item">
+                <h1>1200000+</h1>
+                <h3>Deliveries</h3>
+            </div>
+            <div class="stats_item">
+                <h1>100%</h1>
+                <h3>Guarantee</h3>
+            </div>
+        </div>
+    </div>
+    <div id="contact">
+        <div id="contact_head">
+            <h1 style="letter-spacing: 0.7px;">Request a <span class="green">call back</span></h1>
+            <br>
+            <p style="font-size: 16px;letter-spacing: 0.7px;">WE ARE JUST ONE CLICK AWAY.</p>
+        </div>
+        <form>
+            <input type="text" id="name" name="name" placeholder="Full Name">
+            <input type="email" id="email" name="email" placeholder="Email">
+            <input type="text" id="subject" name="subject" placeholder="Subject">
+            <textarea name="message" id="" cols="50" rows="10" placeholder="Your Message"></textarea>
+            <button type="submit">SEND MESSAGE</button>
+        </form>
+    </div>
+    <div id="footer">
+        <div id="finan">
+            <h3>Quicmeds</h3>
+            <br>
+            <p>QuickMeds - Pharmacy on your tips</p>
+            <br>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-linkedin-in"></i>
+            <i class="fab fa-instagram"></i>
+        </div>
+        <div id="link">
+            <h3>Important Links</h3>
+            <br>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About </a></li>
+                <li><a href="#services">Our Services</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </div>
+        <div id="additional">
+            <h3>Additional Pages</h3>
+            <br>
+            <ul>
+                <li><a href="#">Our Team</a></li>
+                <li><a href="#">How we work </a></li>
+                <li><a href="#">Quick Support</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div id="contact_mini">
+            <h3>Contact Us</h3>
+            <br>
+            <form>
+                <input type="text" id="name" name="name" placeholder="Full Name">
+                <input type="email" id="email" name="email" placeholder="Email">
+                <textarea name="message" id="" cols="50" rows="6" placeholder="Your Message"></textarea>
+                <button type="submit" style="font-size: 12px;">SEND MESSAGE</button>
+            </form>
+        </div>
+    </div>
+    <div id="copy">
+        <p>Copyright &copy 2021 QuickMeds Co., Ltd - Design </p>
+    </div>
+</body>
+
+</html>
